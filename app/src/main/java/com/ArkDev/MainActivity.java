@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
         recyclerView.setLayoutManager(mLayoutManager);
 
         retrieveMovies();
-
-        movieListAdapter = new MovieListAdapter(moviesList, this);
-        recyclerView.setAdapter(movieListAdapter);
     }
 
     private void retrieveMovies(){
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
         getPopularMovies.enqueue(new Callback<MovieModel>() {
             @Override
             public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
-                int x = 10;
+                //int x = 10;
                 if(response.isSuccessful()){
                     if(response.body().getResults().size() != 0 &&
                             response.body().getResults() != null){
@@ -78,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
                                     response.body().getResults().get(i).getPopularity()
                             ));
                         }
+                        movieListAdapter = new MovieListAdapter();
+                        movieListAdapter.setMovieListModels(moviesList);
+                        movieListAdapter.setmOnNoteListener(MainActivity.this);
+                        recyclerView.setAdapter(movieListAdapter);
                     }else{
                         Toast.makeText(MainActivity.this, "result is empty", Toast.LENGTH_SHORT).show();
                     }

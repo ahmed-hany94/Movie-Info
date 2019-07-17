@@ -26,6 +26,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     private void initUI(){
+        moviePoster = findViewById(R.id.movie_poster_detail);
         movieName = findViewById(R.id.movie_name_detail);
         movieDesc = findViewById(R.id.movie_desc_detail);
         movieRating = findViewById(R.id.movie_rating_details);

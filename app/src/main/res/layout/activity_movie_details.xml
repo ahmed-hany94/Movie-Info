@@ -8,9 +8,9 @@
     tools:context="MovieDetailsActivity">
 
     <ImageView
-        android:id="@+id/movie_poster_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/movie_poster_detail"
+        android:layout_width="300sp"
+        android:layout_height="300sp" />
 
     <TextView
         android:id="@+id/movie_name_detail"

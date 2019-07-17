@@ -15,11 +15,11 @@ import java.util.List;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListItemView> {
 
-    List<MovieList> movieListModels;
+    private List<MovieList> movieListModels;
     private OnNoteListener mOnNoteListener;
-    public MovieListAdapter(List<MovieList> movieListDataModels, OnNoteListener onNoteListener) {
-        this.movieListModels = movieListDataModels;
-        this.mOnNoteListener = onNoteListener;
+
+    public MovieListAdapter() {
+
     }
 
     @NonNull
@@ -43,5 +43,21 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListItemView> {
 
     public interface OnNoteListener{
         void onNoteClick(int position);
+    }
+
+    public List<MovieList> getMovieListModels() {
+        return movieListModels;
+    }
+
+    public void setMovieListModels(List<MovieList> movieListModels) {
+        this.movieListModels = movieListModels;
+    }
+
+    public OnNoteListener getmOnNoteListener() {
+        return mOnNoteListener;
+    }
+
+    public void setmOnNoteListener(OnNoteListener mOnNoteListener) {
+        this.mOnNoteListener = mOnNoteListener;
     }
 }
