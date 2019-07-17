@@ -16,9 +16,10 @@ import java.util.List;
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListItemView> {
 
     List<MovieList> movieListModels;
-
-    public MovieListAdapter(List<MovieList> movieListDataModels) {
+    private OnNoteListener mOnNoteListener;
+    public MovieListAdapter(List<MovieList> movieListDataModels, OnNoteListener onNoteListener) {
         this.movieListModels = movieListDataModels;
+        this.mOnNoteListener = onNoteListener;
     }
 
     @NonNull
@@ -26,21 +27,21 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListItemView> {
     public MovieListItemView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.movie_list_item, viewGroup, false);
-        return new MovieListItemView(view);
+        return new MovieListItemView(view, mOnNoteListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieListItemView movieListItemView, int i) {
-        //movieListItemView.bindView(movieListDataModels.get(i));
-        //movieListItemView.
-        //movieListItemView..setText(movieList.getMovieName());
-
-        movieListItemView.getMovieName().setText(movieListModels.get(i).getMovieName());
+        movieListItemView.bindView(movieListModels.get(i));
 
     }
 
     @Override
     public int getItemCount() {
         return movieListModels.size();
+    }
+
+    public interface OnNoteListener{
+        void onNoteClick(int position);
     }
 }

@@ -1,5 +1,6 @@
 package com.ArkDev;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +14,7 @@ import com.ArkDev.Model.MovieModel;
 import com.ArkDev.Model.MovieList;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,19 +22,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MovieListAdapter.OnNoteListener {
 
     ApiInterface apiInterface;
-    Map<String,String> api_key = new HashMap<String, String>();
-    Map<String,String> page_number = new HashMap<String, String>();
 
     List<MovieList> moviesList = new ArrayList<MovieList>();
 
     MovieListAdapter movieListAdapter;
 
-    Integer pageCount = 0;
     LinearLayoutManager mLayoutManager;
     RecyclerView recyclerView;
+
+    public static int PAGE = 1;
 
 
     @Override
@@ -54,17 +52,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
 
         retrieveMovies();
+
+        movieListAdapter = new MovieListAdapter(moviesList, this);
+        recyclerView.setAdapter(movieListAdapter);
     }
 
     private void retrieveMovies(){
-        pageCount += 1;
-        api_key.put("api_key", "633952f05dc8bfe4b0c7b41f1430f13e");
-        page_number.put("page",String.valueOf(pageCount));
 
-        Call<MovieModel> getPopularMovies = apiInterface.getMovies(api_key, page_number);
+        Call<MovieModel> getPopularMovies = this.apiInterface.getMovies(JsonConstants.API_KEY,
+                JsonConstants.LANGUAGE, PAGE);
         getPopularMovies.enqueue(new Callback<MovieModel>() {
             @Override
             public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
+                int x = 10;
                 if(response.isSuccessful()){
                     if(response.body().getResults().size() != 0 &&
                             response.body().getResults() != null){
@@ -77,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
                                     response.body().getResults().get(i).getReleaseDate(),
                                     response.body().getResults().get(i).getPopularity()
                             ));
-
-                            movieListAdapter = new MovieListAdapter(moviesList);
-                            recyclerView.setAdapter(movieListAdapter);
                         }
                     }else{
                         Toast.makeText(MainActivity.this, "result is empty", Toast.LENGTH_SHORT).show();
@@ -91,8 +88,23 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MovieModel> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Failed to retrieve data", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Failed to retrieve data", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
             }
         });
+    }
+
+
+    @Override
+    public void onNoteClick(int position) {
+        Intent intent = new Intent(this, MovieDetailsActivity.class);
+        intent.putExtra("MOVIE", moviesList.get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

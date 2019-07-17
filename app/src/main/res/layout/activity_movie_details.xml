@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="MovieDetailsActivity">
+
+    <ImageView
+        android:id="@+id/movie_poster_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/movie_name_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:textSize="28sp"
+        android:text="@string/temp_text"/>
+
+    <TextView
+        android:id="@+id/movie_desc_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:textSize="14sp"
+        android:text="@string/temp_text"/>
+
+    <TextView
+        android:id="@+id/movie_rating_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:textSize="14sp"
+        android:text="@string/temp_text"/>
+
+    <TextView
+        android:id="@+id/movie_date_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:textSize="14sp"
+        android:text="@string/temp_text"/>
+
+    <TextView
+        android:id="@+id/movie_popularity_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/temp_text"/>
+
+
+</LinearLayout>

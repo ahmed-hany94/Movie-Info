@@ -1,6 +1,9 @@
 package com.ArkDev.Model;
 
-public class MovieList {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MovieList implements Parcelable {
 
     String imagePath;
     String movieName;
@@ -18,6 +21,35 @@ public class MovieList {
         this.releaseDate = releaseDate;
         this.popularity = popularity;
     }
+
+    protected MovieList(Parcel in) {
+        imagePath = in.readString();
+        movieName = in.readString();
+        description = in.readString();
+        if (in.readByte() == 0) {
+            userRating = null;
+        } else {
+            userRating = in.readDouble();
+        }
+        releaseDate = in.readString();
+        if (in.readByte() == 0) {
+            popularity = null;
+        } else {
+            popularity = in.readDouble();
+        }
+    }
+
+    public static final Creator<MovieList> CREATOR = new Creator<MovieList>() {
+        @Override
+        public MovieList createFromParcel(Parcel in) {
+            return new MovieList(in);
+        }
+
+        @Override
+        public MovieList[] newArray(int size) {
+            return new MovieList[size];
+        }
+    };
 
     public String getImagePath() {
         return imagePath;
@@ -66,4 +98,32 @@ public class MovieList {
     public void setPopularity(Double popularity) {
         this.popularity = popularity;
     }
+
+    // Parcelling
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(imagePath);
+        parcel.writeString(movieName);
+        parcel.writeString(description);
+        if (userRating == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(userRating);
+        }
+        parcel.writeString(releaseDate);
+        if (popularity == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(popularity);
+        }
+    }
+
 }

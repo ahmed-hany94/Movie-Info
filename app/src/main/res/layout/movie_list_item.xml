@@ -2,21 +2,99 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    android:background="@drawable/border"
+    android:layout_margin="8dp">
 
     <ImageView
         android:id="@+id/movie_poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_marginEnd="8sp"
+        android:src="@mipmap/ic_launcher"/>
 
     <TextView
         android:id="@+id/movie_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/movie_poster"
-        android:textSize="20dp"
-        android:text="Ahmed"/>
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:text="@string/temp_text"/>
+
+    <TextView
+        android:id="@+id/movie_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/movie_poster"
+        android:layout_below="@+id/movie_name"
+        android:layout_marginBottom="16sp"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/temp_text"/>
+
+    <TextView
+        android:id="@+id/movie_rating_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8sp"
+        android:layout_toEndOf="@id/movie_poster"
+        android:layout_below="@id/movie_desc"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/movie_rating_text"/>
+
+    <TextView
+        android:id="@+id/movie_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/movie_rating_text"
+        android:layout_below="@id/movie_desc"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/movie_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/movie_rating"
+        android:layout_toEndOf="@id/movie_poster"
+        android:layout_marginEnd="8sp"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/release_date_text"/>
+
+    <TextView
+        android:id="@+id/movie_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/movie_date_text"
+        android:layout_below="@id/movie_rating_text"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/temp_text"/>
+
+    <TextView
+        android:id="@+id/movie_popularity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/movie_date"
+        android:layout_toEndOf="@id/movie_poster"
+        android:layout_marginEnd="8sp"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/popularity_text"/>
+
+    <TextView
+        android:id="@+id/movie_popularity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/movie_popularity_text"
+        android:layout_below="@id/movie_date"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/temp_text"/>
 
 
 </RelativeLayout>
